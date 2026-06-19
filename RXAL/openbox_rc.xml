@@ -1,0 +1,34 @@
+<openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <!-- desktop margins -->
+  <margins>
+    <top>0</top>
+    <bottom>0</bottom>
+    <left>0</left>
+    <right>0</right>
+  </margins>
+  <applications>
+    <!-- global rule -->
+    <application class="*">
+      <decor>no</decor>
+      <maximized>yes</maximized>
+    </application>
+    <!-- qjoypad rule -->
+    <application class="qjoypad" name="qjoypad">
+      <fullscreen>no</fullscreen>
+      <maximized>no</maximized>
+      <layer>below</layer>
+      <focus>no</focus>
+    </application>
+    <!-- onboard rule -->
+    <application class="*nboard*" name="*nboard*">
+      <fullscreen>no</fullscreen>
+      <maximized>no</maximized>
+      <layer>above</layer>
+      <position force="yes">
+        <x>center</x>
+        <y>bottom</y>
+      </position>
+      <focus>no</focus>
+    </application>
+  </applications>
+</openbox_config>
