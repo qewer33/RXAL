@@ -16,13 +16,18 @@ RXAL_HOME="/roms/ports/RXAL"
 mkdir -p "$RXAL_HOME"
 
 # Setup logging
-exec > >(tee "$RXAL_HOME/debug.log") 2>&1
+clear > /dev/tty1
+exec > >(tee "$RXAL_HOME/debug.log" > /dev/tty1) 2>&1
 
 # Install deps if they aren't installed
 for dep in xinit xinput openbox qjoypad onboard; do
   command -v "$dep" &>/dev/null || MISSING="$MISSING $dep"
 done
-[ -n "$MISSING" ] && { sudo apt update; sudo apt install -y $MISSING; }
+if [ -n "$MISSING" ]; then
+    echo "[RXAL_LOG] Installing dependencies on first run..."
+    sudo apt update
+    sudo apt install -y $MISSING
+fi
 
 # Install the default qjoypad layout
 QJOYPAD_DIR="/root/.qjoypad3"
@@ -49,7 +54,11 @@ export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 # Install app if not found
 PACKAGE="${RXAL_PACKAGE:-$APP}"
-command -v "$APP" &>/dev/null || { sudo apt update; sudo apt install -y "$PACKAGE"; }
+if ! command -v "$APP" &>/dev/null; then
+    echo "[RXAL_LOG] Installing app package..."
+    sudo apt update
+    sudo apt install -y "$PACKAGE"
+fi
 
 # Setup openbox config rc
 cat << EOF > "$RXAL_HOME/openbox_rc.xml"
@@ -91,6 +100,7 @@ cat << EOF > "$RXAL_HOME/openbox_rc.xml"
 EOF
 
 # Execute launch script with xinit
+echo "[RXAL_LOG] Starting xinit..."
 sudo xinit /bin/bash -c "
   # Start openbox
   openbox --config-file \"$RXAL_HOME/openbox_rc.xml\" &
@@ -113,6 +123,8 @@ sudo xinit /bin/bash -c "
 " -- :0 -nolisten tcp -keeptty
 
 # Cleanup after exit
+echo "[RXAL_LOG] Exiting..."
 sudo killall openbox 2>/dev/null
 sudo killall qjoypad 2>/dev/null
 sudo killall onboard 2>/dev/null
+clear > /dev/tty1
