@@ -16,6 +16,18 @@ The main script will be inside the `RXAL` directory, the wrapper scripts (eg. `T
 sudo apt install xinit xinput openbox onboard qjoypad
 ```
 
+Below is the list of default QJoyPad controls:
+
+| **Control**    | **Input**           |
+|----------------|---------------------|
+| Left Joystick  | Mouse movement      |
+| Right Joystick | Fast mouse movement |
+| R1 Shoulder    | Right click         |
+| R2 Shoulder    | Left click          |
+| L1 Shoulder    | Scroll down         |
+| L2 Shoulder    | Scroll up           |
+| X Button       | Exit app            |
+
 ## Included Wrappers
 
 Below is a list of included wrapper scripts:
