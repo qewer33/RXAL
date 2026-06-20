@@ -16,7 +16,7 @@ RXAL_HOME="/roms/ports/RXAL"
 mkdir -p "$RXAL_HOME"
 
 # Setup logging
-exec &> "$RXAL_HOME/debug.log"
+exec > >(tee "$RXAL_HOME/debug.log") 2>&1
 
 # Install deps if they aren't installed
 for dep in xinit xinput openbox qjoypad onboard; do

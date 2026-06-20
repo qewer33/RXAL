@@ -2,6 +2,8 @@
 
 RXAL is a simple Bash script for the R36S (the cheap but great handheld retro gaming device) to launch native Linux X11 GUI apps from the EmulationStation UI.
 
+![showcase](./assets/RXAL_showcase.png)
+
 ## Installation & Usage
 
 **Download the repo as zip (or clone it) and move it straight to `EASYROMS/ports/` folder of your SD card.**
@@ -22,13 +24,14 @@ Below is a list of included wrapper scripts:
 |-----------------|----------------|-------------------------------|
 | Terminal.sh     | xfce4-terminal | Terminal emulator             |
 | Firefox.sh      | firefox-esr    | Web browser                   |
+| NetSurf.sh      | netsurf-gtk    | Lightweight web browser       |
 | Thunar.sh       | thunar         | File manager                  |
 | Mousepad.sh     | mousepad       | Text editor                   |
 | Drawing.sh      | mousepad       | Paint software                |
 
 ## How Does It Work?
 
-The main `RXAL.sh` script basically just opens a new X11 sessions via `xinit` and launches the given app/command (the first argument `$1`). It also launches QJoyPad to control the mouse via the joysticks and also launches Onboard (screen keyboard) if the `--keyboard` argument is passed. It uses Openbox to manage the windows.
+The main `RXAL.sh` script basically just opens a new X11 session via `xinit` and launches the given app/command (the first argument `$1`). It also launches QJoyPad to control the mouse via the joysticks and also launches Onboard (screen keyboard) if the `--keyboard` argument is passed. It uses Openbox to manage the windows.
 
 ## Writing a Wrapper
 
